@@ -11,8 +11,10 @@ __pycache__/
 .cache/
 *.cache
 
-# Virtual environments (muy recomendado)
+# Virtual environments
+.venv/
 venv/
+env/
 .env/
 .env*/
 
