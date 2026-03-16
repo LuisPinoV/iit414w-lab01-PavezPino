@@ -12,7 +12,7 @@
 Requiremnts:
 
     - python 3.12.3 or above
-    - virtual enviroment  (venv) installed
+    - virtual enviroment  (venv)
     - vscode with jupyter extension or Jupyter Notebook installed
 
 To create the enviroment use:
@@ -48,10 +48,5 @@ pip install -r requirements.txt
 
 ## How to run
 
-To test, every notebook allow to execute with a run all command from the first comand cell, starting from __baseline.ipynb__.
-
-## Problems encountered
-
-
-## Expected Outputs
+Run any of the main dataset, baseline.ipynb or EDA.ipynb
 

@@ -66,3 +66,75 @@ print('   • Same locale → CSV parsing and sorting behave identically')
 **Final Decision:**
 I keep partially because data like memory aviable is useful and relevant to find some posible errors and problems to execute the notebook.
 
+## Entry [2] — [EDA Questions] 
+
+**Context**
+
+I needed exploratory data analysis questions for a Formula 1 dataset (2023–2024) obtained from the Jolpica F1 API.
+
+**Prompt(s)**
+Prompt 1: "give me examples for questions for exploratory data analysis using a dataset created from the Jolpica API"
+
+**Relevant Output:**
+The AI generated a list of exploratory data analysis questions and some tips on how to formulate good analytical questions.
+
+**Validation:**
+
+Checked that each question could be answered using the available dataset columns.
+
+Verified that the questions were relevant to the dataset context.
+
+**Adaptations:**
+
+Removed questions that required data not present in the dataset.
+
+**Final Decision:**
+Used.
+
+
+## Entry [3] — [Consistency Metric]
+
+**Context**
+
+I wanted to measure driver consistency using a metric better than standard deviation.
+
+**Prompt(s):**
+Prompt 1: "There is something better than standard deviation for measure a racer consistency?"
+
+**Relevant Output:**
+The AI suggested using the coefficient of variation and provided the formula and Python code to compute it per driver.
+
+**Validation:**
+
+Calculated the coefficient of variation manually for some drivers to verify the results.
+
+**Adaptations:**
+
+Filtered drivers with very few races to avoid unstable metrics.
+
+**Final Decision:**
+Rejected. It was not a good metric for the analysis.
+
+
+Entry [4] — [Interpretation of Results]
+
+**Context**
+
+I needed help interpreting some analysis results and getting advice about possible conclusions.
+
+**Prompt(s)**
+Prompt 1: "I want you to interpret this result, what does it mean? which conclusion can you give me?"
+
+**Relevant Output**
+The AI explained how extreme results or DNFs could affect variation metrics and suggested possible interpretations.
+
+**Validation**
+
+Compared the explanation with race outcomes in the dataset.
+
+**Adaptations**
+
+Added context about statistical limitations of the metric.
+
+**Final Decision**
+Partially used.
