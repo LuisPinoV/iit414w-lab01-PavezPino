@@ -116,7 +116,7 @@ Filtered drivers with very few races to avoid unstable metrics.
 Rejected. It was not a good metric for the analysis.
 
 
-Entry [4] — [Interpretation of Results]
+## Entry [4] — [Interpretation of Results]
 
 **Context**
 
@@ -138,3 +138,120 @@ Added context about statistical limitations of the metric.
 
 **Final Decision**
 Partially used.
+
+
+## Entry [5] — [Baseline experiment]
+
+**Context**
+
+I asked to copilot to make a metric for the simulate experiment, that we will improve in the lab 2.
+
+**Prompt(s):**
+Prompt 1: "Using fastf1 library Make A rule-based prediction that requires NO machine learning code.If grid > 14, predict DNF the race; otherwise predict "finish the race. apply it to every race in your validation set, and count how often it's right.
+
+Compute accuracy = correct predictions / total predictions. Report this number clearly."
+
+**Relevant Output:**
+The Ai complete the code, for the asked task, with the context of the imported libraries.
+
+the code given was:
+
+```python
+# ── Rule-Based Prediction: Grid Position → DNF Prediction ────────────────
+
+# Get race data from 2023 season (validation set)
+# Using races from mid-season onwards
+season = 2023
+races_to_fetch = [10, 11, 12, 13, 14, 15]  # Races 10-22
+
+predictions = []
+actual_results = []
+race_info = []
+
+print(f"Fetching {len(races_to_fetch)} races from {season} season...")
+print("=" * 70)
+
+for race_round in races_to_fetch:
+    try:
+        session = fastf1.get_session(season, race_round, 'R')  # 'R' for race
+        session.load()
+        
+        race_name = session.event['EventName']
+        
+        # Get results dataframe with grid and DNF status
+        results = session.results
+        
+        # Identify DNF drivers (Status is not 'Finished')
+        dnf_drivers = set(results[results['Status'] != 'Finished'].index)
+        finished_drivers = set(results[results['Status'] == 'Finished'].index)
+        
+        # Apply rule: grid > 14 → predict DNF, grid <= 14 → predict finish
+        for driver_idx in results.index:
+            grid_pos = results.loc[driver_idx, 'GridPosition']
+            
+            # Skip if no valid grid position (sometimes NaN for reserve/safety car)
+            if pd.isna(grid_pos):
+                continue
+            
+            grid_pos = int(grid_pos)
+            
+            # Apply rule
+            predicted_dnf = grid_pos > 14
+            actual_dnf = driver_idx in dnf_drivers
+            
+            is_correct = predicted_dnf == actual_dnf
+            
+            predictions.append({
+                'race': race_name,
+                'round': race_round,
+                'driver': driver_idx,
+                'grid_position': grid_pos,
+                'predicted_dnf': predicted_dnf,
+                'actual_dnf': actual_dnf,
+                'correct': is_correct
+            })
+        
+        print(f"✓ Round {race_round}: {race_name} - {len(results)} drivers")
+        
+    except Exception as e:
+        print(f"✗ Round {race_round}: Error - {str(e)}")
+
+# Convert to DataFrame for analysis
+predictions_df = pd.DataFrame(predictions)
+
+# Calculate metrics
+total_predictions = len(predictions_df)
+correct_predictions = predictions_df['correct'].sum()
+accuracy = correct_predictions / total_predictions if total_predictions > 0 else 0
+
+print("=" * 70)
+print(f"\n📊 RULE-BASED PREDICTION RESULTS")
+print(f"{'─' * 70}")
+print(f"Rule: If GridPosition > 14 → Predict DNF | Otherwise → Predict Finish")
+print(f"{'─' * 70}")
+print(f"Total Predictions:  {total_predictions}")
+print(f"Correct:            {correct_predictions}")
+print(f"Incorrect:          {total_predictions - correct_predictions}")
+print(f"\n🎯 ACCURACY: {accuracy:.4f} ({accuracy*100:.2f}%)")
+print(f"{'─' * 70}")
+
+# Breakdown by outcome
+print(f"\nDetailed Breakdown:")
+print(f"  - Correctly predicted DNF:    {predictions_df[(predictions_df['predicted_dnf'] == True) & (predictions_df['correct'] == True)].shape[0]}")
+print(f"  - Correctly predicted Finish: {predictions_df[(predictions_df['predicted_dnf'] == False) & (predictions_df['correct'] == True)].shape[0]}")
+print(f"  - False positives (DNF):      {predictions_df[(predictions_df['predicted_dnf'] == True) & (predictions_df['correct'] == False)].shape[0]}")
+print(f"  - False negatives (Finish):   {predictions_df[(predictions_df['predicted_dnf'] == False) & (predictions_df['correct'] == False)].shape[0]}")
+
+```
+
+**Validation:**
+
+Calculated the values  manually to verify the results.
+
+**Adaptations:**
+
+Filtered drivers with very few races to avoid unstable metrics.
+
+**Final Decision:**
+
+We keep the code.
