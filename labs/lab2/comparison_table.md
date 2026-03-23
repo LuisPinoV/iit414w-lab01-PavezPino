@@ -2,11 +2,12 @@
 ## [Your Name(s)]
 | Model / Baseline | Accuracy | Precision | Recall | F1 | ROC-AUC |
 |------------------------|----------|-----------|--------|-------|---------|
-| Majority class (Lab 1) | 0.XX | 0.XX | 0.XX | 0.XX | 0.XX |
-| Domain heuristic (Lab 1)| 0.XX | 0.XX | 0.XX | 0.XX | 0.XX |
-| Prior-period (if done) | 0.XX | 0.XX | 0.XX | 0.XX | 0.XX |
-| Lab 2 model (LogReg/DT) | 0.XX | 0.XX | 0.XX | 0.XX | 0.XX |
-## Primary metric: [YOUR CHOICE] (justified in Lab 1)
+| Majority class (Lab 1) | 0.71 | 0.XX | 0.XX | 0.XX | 0.XX |
+| Domain heuristic (Lab 1)| 0.75 | 0.75 | 0.75 | 0.75 | 0.75 |
+| Lab 2 model (LogReg/DT) | 0.762 | 0.759 | 0.765 | 0.762 | 0.813 |
+## Primary metric: Grid 
 ## Interpretation (3–5 sentences)
 
-[Did the model beat the baselines? By how much? Which baseline was hardest to beat? What does this tell you about the value of your features vs. the baseline rules? If the model did NOT beat a baseline, what does that mean and what would you change?]
+The model beat the majority class, but the improvement still is little, the next step will be test it with more data and checking for correlation in the features and select the 10 better allowed.
+
+Also since the data selected are well balanced (almost 50/50), the metrics are the same in the first lab, but now we got an improvement.
