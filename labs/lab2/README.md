@@ -48,5 +48,12 @@ pip install -r requirements.txt
 
 ## How to run
 
-Run any of the main dataset, baseline.ipynb or EDA.ipynb
+Main notebook for this lab:
+
+- `lab02_feature_engineering.ipynb`
+
+Supporting files:
+
+- `comparison_table.md`
+- `PROMPTS.md`
 
