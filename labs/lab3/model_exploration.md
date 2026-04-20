@@ -3,7 +3,7 @@
 
 ## 0. Framing Decision (initial - you can revise for Lab 3 final submission)
 - **Business question:** How many points should we expect a driver to score in Sunday’s race based on pre-race information?
-- **Target:** points (regression)
+- **Target:** points
 - **Metric:** MAE
 - **Why this framing:** Points are continuous and ordered, so regression aligns directly with race strategy decisions where the magnitude of expected points matters, not only whether points are scored.
 - **Rejected alternative:** Binary top-10 classification was rejected for now because it loses granularity between low and high point outcomes that are important for championship planning.

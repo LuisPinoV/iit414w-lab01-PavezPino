@@ -11,7 +11,7 @@ We evaluated five prediction approaches to estimate how many points each driver 
 On average, the best model misses by about 2.8 points per driver-race prediction. This is accurate enough to support scenario planning (for example, expected points under conservative vs aggressive strategy) but not precise enough to treat as a certainty for a single race.
 
 ## Why this model is preferred
-The Random Forest model performed best because race outcomes are not purely linear. The value of starting near the front and recent performance trends interact in complex ways. The model can capture those interactions better than linear alternatives.
+The Random Forest model performed best because race outcomes are not purely linear due to events or accidents. The value of starting near the front and recent performance trends interact in complex ways. The model can capture those interactions better than linear alternatives.
 
 ## Risk and confidence
 The Random Forest model had a stronger fit on training seasons than on 2024 test data (train MAE **1.789** vs test MAE **2.760**). This gap indicates some overfitting risk: the model learns historical patterns well, but part of that advantage may not transfer perfectly to future races.
