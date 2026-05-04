@@ -1,23 +1,27 @@
 # Team Decision Sheet — Capstone Hito 1
+
 ### IIT414W · F1 Race Strategy Advisor · Mon May 4, 2026
 
 > **Instructions.** Complete this sheet in your team repo as `framing.md`. Every team has 60 minutes during the studio block (14:45–15:45). Required commits: by 15:00 (sections 1–4 populated) and by 15:40 (full sheet + dataset-load notebook). No section can be left blank — write "TBD with rationale" if you are uncertain, but blank entries fail the framing rubric.
 
-**Team name:** ____________________
-**Team members:** ____________________
-**GitHub repo URL:** ____________________
+**Team name:** Model Thinkers (11 group)
+**Team members:** Lucas Pavez - Luis Pino
+**GitHub repo URL:** [Repo](https://github.com/LuisPinoV/iit414w-lab01-PavezPino)
 
 ---
 
 ## 1. Decision Context
 
 **What strategy decision is this tool supporting?**
+
 > One sentence. Example: "Whether to recommend a 1-stop vs 2-stop strategy for a midfield-grid driver at a circuit with predictable degradation."
 
 **Who makes this decision?**
+
 > One sentence. Example: "The strategy desk on the pit wall during a Friday strategy meeting."
 
 **When in the race weekend is the decision made?**
+
 > One sentence. Example: "Friday evening, after FP2, before parc fermé conditions lock the car setup."
 
 ---
@@ -30,11 +34,10 @@
 
 **Why this metric for this decision?** (2 sentences max — what does the metric measure that an alternative does not?)
 
-> 
-
 **Secondary metric (optional but recommended):** ____________________
 
 **Temporal split (LOCKED for Hito 1):**
+
 - Train: seasons 2019, 2020, 2021
 - Calibration: season 2022 (used to fit calibration mapping; never for model selection)
 - Test: seasons 2023, 2024 (untouched until final evaluation)
@@ -44,17 +47,15 @@
 ## 3. Baseline Plan
 
 **Baseline approach (one sentence):**
+
 > Example: "Calibrated logistic regression on grid_position + constructor_tier + n_stops only."
 
 **Why is this baseline F1-defendable?** (One sentence — could you justify it without ever seeing 2023–2024 data?)
 
-> 
-
 **Direction check:** higher baseline score means higher predicted P(top10). Yes / No / Explain.
 
-> 
-
 **Expected baseline performance vs docent floor:**
+
 - Grid-rule docent baseline: Brier = 0.208 on test
 - Calibrated docent model: Brier = 0.132 on test, ROC-AUC = 0.892
 - Our team's best baseline expected to land near: Brier = ____________________
@@ -64,6 +65,7 @@
 ## 4. What-If Comparison Plan
 
 **Strategy variables we will vary:**
+
 - [ ] `n_stops`
 - [ ] `compound_sequence`
 - [ ] `stint_lengths` (or stint1_length, stint2_length, etc.)
@@ -76,6 +78,7 @@
 > Scenario B: ____________________
 
 **Decision metric for the comparison:**
+
 > Example: "Difference in calibrated P(is_top10) between Scenario A and Scenario B, with bootstrap 90% confidence interval."
 
 ---
@@ -98,15 +101,11 @@ Limitation #2 we acknowledge: ____________________
 
 **Three experiments we will run between today and Wednesday 16:20:**
 
-1. ____________________
-2. ____________________
-3. ____________________
+1. ---
+2. ---
+3. ---
 
 **Hypothesis for each (one line each — what do we expect to happen and why?):**
-
-> 1. 
-> 2. 
-> 3. 
 
 ---
 
@@ -115,14 +114,12 @@ Limitation #2 we acknowledge: ____________________
 **Who is doing what between now and Wednesday?**
 
 | Member | Owns | Branch / file in repo |
-|---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| ------ | ---- | --------------------- |
+|        |      |                       |
+|        |      |                       |
+|        |      |                       |
 
 **When does each member commit by?** (We need at least one commit per member per day Tue and Wed.)
-
-> 
 
 ---
 
@@ -134,11 +131,7 @@ Limitation #2 we acknowledge: ____________________
 
 **Concrete critique we received:**
 
-> 
-
 **How we will address this critique by Wednesday:**
-
-> 
 
 ---
 
