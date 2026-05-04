@@ -28,38 +28,32 @@ Friday evening after FP2, before the car setup is locked for parc fermé conditi
 
 ## 2. Target & Metric
 
-**Target (LOCKED for Hito 1):** `is_top10`
+**Target:** `is_top10`
 
 **Primary metric:** Brier score
 
 **Why this metric for this decision?** (2 sentences max — what does the metric measure that an alternative does not?)
 
-**Secondary metric (optional but recommended):** ____________________
+**Secondary metric (optional but recommended):** ROC_AUC
 
-**Temporal split (LOCKED for Hito 1):**
+**Temporal split:**
 
 - Train: seasons 2019, 2020, 2021
 - Calibration: season 2022 (used to fit calibration mapping; never for model selection)
 - Test: seasons 2023, 2024 (untouched until final evaluation)
 
 ---
-
 ## 3. Baseline Plan
 
 **Baseline approach (one sentence):**
 
-Calibrated logistic regression using grid_position, constructor_tier, and n_stops.
 Calibrated logistic regression using grid_position, constructor_tier, and n_stops.
 
 **Why is this baseline F1-defendable?** (One sentence — could you justify it without ever seeing 2023–2024 data?)
 
 These features represent fundamental pre-race performance indicators and basic strategy choices that have consistently influenced top-10 outcomes in historical F1 data.
 
-These features represent fundamental pre-race performance indicators and basic strategy choices that have consistently influenced top-10 outcomes in historical F1 data.
-
 **Direction check:** higher baseline score means higher predicted P(top10). Yes / No / Explain.
-
-Yes, the logistic regression outputs probabilities where higher values indicate greater likelihood of top-10 finish.
 
 Yes, the logistic regression outputs probabilities where higher values indicate greater likelihood of top-10 finish.
 
@@ -89,12 +83,9 @@ Yes, the logistic regression outputs probabilities where higher values indicate 
 
 Scenario A: n_stops=1, compound_sequence='S-M' (one-stop strategy with soft to medium tires)
 Scenario B: n_stops=2, compound_sequence='S-M-S' (two-stop strategy with soft-medium-soft tires)
-Scenario A: n_stops=1, compound_sequence='S-M' (one-stop strategy with soft to medium tires)
-Scenario B: n_stops=2, compound_sequence='S-M-S' (two-stop strategy with soft-medium-soft tires)
 
 **Decision metric for the comparison:**
 
-Difference in calibrated P(is_top10) between Scenario A and Scenario B, with 90% confidence interval from bootstrapping.
 Difference in calibrated P(is_top10) between Scenario A and Scenario B, with 90% confidence interval from bootstrapping.
 
 ---
@@ -104,15 +95,10 @@ Difference in calibrated P(is_top10) between Scenario A and Scenario B, with 90%
 **Five known dataset limitations are documented in the Capstone Brief. Which TWO most affect our team's specific approach?**
 
 Limitation #1 we acknowledge: Historical data from 2019-2024 may not capture future regulatory changes or technological advancements in F1.
-Limitation #1 we acknowledge: Historical data from 2019-2024 may not capture future regulatory changes or technological advancements in F1.
-
-> Why it matters for our approach (1 sentence): This could lead to overfitting on past patterns that don't generalize to future seasons with different car designs or rules.
 > Why it matters for our approach (1 sentence): This could lead to overfitting on past patterns that don't generalize to future seasons with different car designs or rules.
 
 Limitation #2 we acknowledge: Dataset lacks detailed race-day incident data such as safety car periods, crashes, or penalties that can dramatically alter race outcomes.
-Limitation #2 we acknowledge: Dataset lacks detailed race-day incident data such as safety car periods, crashes, or penalties that can dramatically alter race outcomes.
 
-> Why it matters for our approach (1 sentence): Strategy recommendations based on pre-race data may be invalidated by unpredictable incidents that our model cannot anticipate.
 > Why it matters for our approach (1 sentence): Strategy recommendations based on pre-race data may be invalidated by unpredictable incidents that our model cannot anticipate.
 
 ---
@@ -163,15 +149,3 @@ Lucas commits by Tuesday 18:00 and Wednesday 16:20; Luis commits by Tuesday 20:0
 **How we will address this critique by Wednesday:**
 
 ---
-
-## Self-Check Before Committing
-
-Before you push this to GitHub, verify:
-
-- [ ] Decision context is one sentence, not a paragraph
-- [ ] Target says exactly `is_top10` (not "Top-10" or "P(top10)")
-- [ ] Temporal split shows three blocks: 2019–2021 / 2022 / 2023–2024
-- [ ] Baseline is described in code-realistic terms (we could implement it)
-- [ ] What-if scenarios have specific feature values, not generic words
-- [ ] At least 2 of the 5 limitations are acknowledged with consequence
-- [ ] PROMPTS.md exists in the repo (even if empty for now — will be populated by Wednesday)
