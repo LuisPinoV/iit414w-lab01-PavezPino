@@ -34,9 +34,7 @@ Friday evening after FP2, before the car setup is locked for parc fermé conditi
 
 **Why this metric for this decision?** (2 sentences max — what does the metric measure that an alternative does not?)
 
-Brier score evaluates the accuracy of probabilistic predictions by measuring both calibration (how well predicted probabilities match actual outcomes) and discrimination (ability to distinguish between classes). This is essential for strategy decisions where we need reliable probability estimates for risk assessment, unlike simpler metrics like accuracy that ignore prediction confidence.
-
-**Secondary metric (optional but recommended):** ROC-AUC
+**Secondary metric (optional but recommended):** ____________________
 
 **Temporal split (LOCKED for Hito 1):**
 
@@ -51,8 +49,11 @@ Brier score evaluates the accuracy of probabilistic predictions by measuring bot
 **Baseline approach (one sentence):**
 
 Calibrated logistic regression using grid_position, constructor_tier, and n_stops.
+Calibrated logistic regression using grid_position, constructor_tier, and n_stops.
 
 **Why is this baseline F1-defendable?** (One sentence — could you justify it without ever seeing 2023–2024 data?)
+
+These features represent fundamental pre-race performance indicators and basic strategy choices that have consistently influenced top-10 outcomes in historical F1 data.
 
 These features represent fundamental pre-race performance indicators and basic strategy choices that have consistently influenced top-10 outcomes in historical F1 data.
 
@@ -60,10 +61,13 @@ These features represent fundamental pre-race performance indicators and basic s
 
 Yes, the logistic regression outputs probabilities where higher values indicate greater likelihood of top-10 finish.
 
+Yes, the logistic regression outputs probabilities where higher values indicate greater likelihood of top-10 finish.
+
 **Expected baseline performance vs docent floor:**
 
 - Grid-rule docent baseline: Brier = 0.208 on test
 - Calibrated docent model: Brier = 0.132 on test, ROC-AUC = 0.892
+- Our team's best baseline expected to land near: Brier = 0.140
 - Our team's best baseline expected to land near: Brier = 0.140
 
 ---
@@ -75,6 +79,9 @@ Yes, the logistic regression outputs probabilities where higher values indicate 
 - [x] `n_stops`
 - [x] `compound_sequence`
 - [x] `stint_lengths` (or stint1_length, stint2_length, etc.)
+- [x] `n_stops`
+- [x] `compound_sequence`
+- [x] `stint_lengths` (or stint1_length, stint2_length, etc.)
 - [ ] `avg_pit_stop_duration_s`
 - [ ] Other: ____________________
 
@@ -82,9 +89,12 @@ Yes, the logistic regression outputs probabilities where higher values indicate 
 
 Scenario A: n_stops=1, compound_sequence='S-M' (one-stop strategy with soft to medium tires)
 Scenario B: n_stops=2, compound_sequence='S-M-S' (two-stop strategy with soft-medium-soft tires)
+Scenario A: n_stops=1, compound_sequence='S-M' (one-stop strategy with soft to medium tires)
+Scenario B: n_stops=2, compound_sequence='S-M-S' (two-stop strategy with soft-medium-soft tires)
 
 **Decision metric for the comparison:**
 
+Difference in calibrated P(is_top10) between Scenario A and Scenario B, with 90% confidence interval from bootstrapping.
 Difference in calibrated P(is_top10) between Scenario A and Scenario B, with 90% confidence interval from bootstrapping.
 
 ---
@@ -94,11 +104,15 @@ Difference in calibrated P(is_top10) between Scenario A and Scenario B, with 90%
 **Five known dataset limitations are documented in the Capstone Brief. Which TWO most affect our team's specific approach?**
 
 Limitation #1 we acknowledge: Historical data from 2019-2024 may not capture future regulatory changes or technological advancements in F1.
+Limitation #1 we acknowledge: Historical data from 2019-2024 may not capture future regulatory changes or technological advancements in F1.
 
+> Why it matters for our approach (1 sentence): This could lead to overfitting on past patterns that don't generalize to future seasons with different car designs or rules.
 > Why it matters for our approach (1 sentence): This could lead to overfitting on past patterns that don't generalize to future seasons with different car designs or rules.
 
 Limitation #2 we acknowledge: Dataset lacks detailed race-day incident data such as safety car periods, crashes, or penalties that can dramatically alter race outcomes.
+Limitation #2 we acknowledge: Dataset lacks detailed race-day incident data such as safety car periods, crashes, or penalties that can dramatically alter race outcomes.
 
+> Why it matters for our approach (1 sentence): Strategy recommendations based on pre-race data may be invalidated by unpredictable incidents that our model cannot anticipate.
 > Why it matters for our approach (1 sentence): Strategy recommendations based on pre-race data may be invalidated by unpredictable incidents that our model cannot anticipate.
 
 ---
@@ -110,9 +124,15 @@ Limitation #2 we acknowledge: Dataset lacks detailed race-day incident data such
 1. Implement and evaluate the baseline calibrated logistic regression model using temporal validation.
 2. Extend the baseline by incorporating additional strategy features like compound_sequence and stint_lengths.
 3. Compare the extended model against a random forest ensemble to capture non-linear strategy-performance interactions.
+1. Implement and evaluate the baseline calibrated logistic regression model using temporal validation.
+2. Extend the baseline by incorporating additional strategy features like compound_sequence and stint_lengths.
+3. Compare the extended model against a random forest ensemble to capture non-linear strategy-performance interactions.
 
 **Hypothesis for each (one line each — what do we expect to happen and why?):**
 
+1. The baseline will achieve Brier score around 0.140, improving over the grid-rule baseline by leveraging basic strategy features.
+2. Adding strategy features will reduce Brier score by at least 0.01 due to capturing tire degradation and pit timing effects.
+3. Random forest will outperform logistic regression with Brier score below 0.130 by modeling complex interactions between strategy variables and driver performance.
 1. The baseline will achieve Brier score around 0.140, improving over the grid-rule baseline by leveraging basic strategy features.
 2. Adding strategy features will reduce Brier score by at least 0.01 due to capturing tire degradation and pit timing effects.
 3. Random forest will outperform logistic regression with Brier score below 0.130 by modeling complex interactions between strategy variables and driver performance.
