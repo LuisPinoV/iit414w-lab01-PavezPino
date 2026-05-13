@@ -31,8 +31,20 @@ Loads `f1_strategy_race_level.csv` and applies the locked split: train 2019–20
 ### 2. Leakage guard
 Separates pre-race columns, scenario inputs, audit columns, and outcomes.
 
-### 3. Two-target modeling
-Trains calibrated logistic regression models for `is_top10` and `is_top3` using the same feature set.
+### 3. Two-target modeling with stacking
+
+**Primary target** (`is_top10`): Trains calibrated logistic regression on 20 original features. Results are locked from Hito 1.
+
+**Expansion target** (`is_top3`): Uses **stacking** — trains calibrated logistic regression on 21 features (20 original + calibrated `is_top10` predictions as meta-feature). This approach leverages the complementary signal from the primary model while respecting the temporal split (probabilities generated separately per train/calib/test to avoid leakage).
+
+Both models are calibrated on the 2022 validation set to ensure reliable probabilities for what-if comparisons.
+
+### 3.5. Baseline comparisons for `is_top3`
+Computes two baselines:
+- **Prevalence baseline**: Constant prediction = train set positive rate
+- **Grid-position rule baseline**: Domain-motivated rule (P=0.35 if grid≤5, else 0.10)
+
+Compares both against the calibrated model to quantify improvement.
 
 ### 4. Matched what-if pair
 Scores a fixed driver-race context under two strategy plans and shows where the targets disagree.
